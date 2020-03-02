@@ -20,17 +20,19 @@ class results extends Component{
         else {
             this.handleDelete(id)
         }
-    }
-    render() {
-        return (
-                   <div className="results">
-                <h1>{this.props.status}</h1>
+    }};
+//     render() {
+//         return ()
+//                 //    <div className="results">
+//                 // <h1>{this.props.status}</h1>
 
-                {this.props.books.map(book => (
-                    <div className="result-box" key={book.link}>
-                        <hr />
+//                 // {this.props.books.map(book => (
+//                 //     <div className="result-box" key={book.link}>
+//                 //         <hr />
 
-   </div>             
-}
+// //    </div>     
+//     }
+// };        
 
-export default results;
+
+// export default results;
