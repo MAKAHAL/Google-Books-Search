@@ -1,71 +1,88 @@
 import React from "react";
+import Form from "../components/Form";
 import Results from "../components/Results";
-import API from "../utils/api";
-import Form from "../components/Form"
+import API from "../utils/API";
 
-class search extends React.Component {
+const booksresults = googleApiResults => {
+    const bookArray = [];
+  
+    googleApiResults.map(book => {
+  
+      const formattedBook = {
+        title: book.volumeInfo.title,
+        authors: book.volumeInfo.authors,
+        description: book.volumeInfo.description,
+        googleId: book.id,
+        image: book.volumeInfo.imageLinks.thumbnail,
+        link: book.volumeInfo.canonicalVolumeLink
+      };
+  
+      bookArray.push(formattedBook);
+      return bookArray
+    });
+    return bookArray;
+  };
+  
+  class Search extends React.Component {
     state = {
-        books: [],
-        value: ""
-    }
-    componentDidMount() {
-    }
-    searchBooks = query => {
-        API.search(query)
-            .then(res => this.setState({ result: res.data }))
-            .catch(err => console.log(err));
-    }
-
-
+      search: '',
+      results: [],
+      error: ''
+    };
+  
+    saveBook = event => {
+  
+      const chosenBook = this.state.results.find(book => book.googleId === event.target.id);
+  
+      const newSave = {
+        title: chosenBook.title,
+        authors: chosenBook.authors,
+        description: chosenBook.description,
+        googleId: chosenBook.googleId,
+        image: chosenBook.image,
+        link: chosenBook.link
+      };
+  
+      API.saveBook(newSave)
+      console.log(newSave);
+    };
+  
     
-    
-   changedinput = event => {
+    handleInputChange = event => {
         const name = event.target.name;
         const value = event.target.value;
         this.setState({
             [name]: value
         });
     };
-
-    submit = event => {
-        event.preventDefault();
-        API.search(this.state.search)
-            .then(res => {
-                if (res.data.status === "error") {
-                    throw new Error(res.data.message);
-                }
-                this.setState({ books: res.data.items });
-            })
-            .catch(err => this.setState({ error: err.message }));
+  
+    handleFormSubmit = event => {
+      event.preventDefault();
+      API.getBooks(this.state.search)
+        .then(res => {
+          const formattedArray = booksresults(res.data.items);
+          this.setState({results: formattedArray});
+        })
+        .catch(err => console.log(err))
     };
-
-    look = bookinfo => {
-        return {
-            _id: bookinfo.id,
-            title: bookinfo.volumeInfo.title,
-            authors: bookinfo.volumeInfo.authors,
-            description: bookinfo.volumeInfo.description,
-            image: bookinfo.volumeInfo.imageLinks.thumbnail,
-            link: bookinfo.volumeInfo.previewLink
-        }
-    }
-
-
+  
     render() {
-        return (
-            <div>
-                <Form
-                    search={this.state.search}
-                    changedinput={this.changedinput}
-                    submit={this.submit}
-                />
-                <div className="container">
-                    <h2>Results</h2>
-                    <Results books={this.state.books} />
-                </div>
-            </div>
-        )
+      return (
+        <div className="container">
+          
+          <Form
+            handleInputChange={this.handleInputChange}
+            handleFormSubmit={this.handleFormSubmit}
+          />
+          <Results
+            books={this.state.results}
+            buttonAction={this.saveBook}
+            buttonType="btn btn-success mt-2"
+            buttonText="Save Book"
+          />
+        </div>
+      );
     }
-
-
-};
+  }
+  
+  export default Search;
