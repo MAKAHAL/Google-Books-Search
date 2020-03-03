@@ -1,9 +1,11 @@
 import React from 'react';
 // import logo from './logo.svg';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import './App.css';
-import search from "./pages/search";
-import saved from "./pages/saved"
+import { BrowserRouter as Router, Route } from "react-router-dom";
+// import './App.css';
+import Search from "./pages/search";
+import Saved from "./pages/saved"
+import NavBar from "./components/NavBar";
+import Header from "./components/Header";
 // function App() {
 //   return (
 //     <div className="App">
@@ -13,10 +15,12 @@ class App extends React.Component {
     return (
       <Router>
         <div className="App">
-          <Switch>
-            <Route exact path="/" component={search} />
-            <Route exact path="/saved" component={saved} />
-          </Switch>
+        <NavBar />
+          <Header />
+          
+        <Route exact path="/" component={Search} />
+            <Route exact path="/search" component={Search} />
+            <Route exact path="/saved" component={Saved} />
         </div>
       </Router>
     );

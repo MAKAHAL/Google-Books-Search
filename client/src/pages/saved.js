@@ -1,6 +1,6 @@
 
 import React from "react";
-import results from "../components/results";
+import Results from "../components/Results";
 import API from "../api";
 class saved extends React.Component {
     state = {
