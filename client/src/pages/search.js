@@ -1,6 +1,6 @@
 import React from "react";
 import results from "../components/results";
-import API from "../api";
+import API from "../utils/api";
 
 class search extends React.Component {
     state = {

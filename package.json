@@ -35,5 +35,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MAKAHAL/Google-Books-Search.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MAKAHAL/Google-Books-Search/issues"
+  },
+  "homepage": "https://github.com/MAKAHAL/Google-Books-Search#readme",
+  "description": ""
 }
