@@ -4,8 +4,8 @@ import NavBar from "./components/NavBar";
 
 import Wrapper from "./components/Wrapper";
 
-import Search from "./pages/Search";
-import Saved from "./pages/Saved";
+import Search from "./pages/search";
+import Saved from "./pages/saved";
 
 import "./App.css";
 
