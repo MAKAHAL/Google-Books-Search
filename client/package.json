@@ -2,6 +2,9 @@
   "name": "google-books",
   "version": "0.1.0",
   "description": "Google Books",
+  "engines":{
+    "node": "12.13.1"
+  },
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
